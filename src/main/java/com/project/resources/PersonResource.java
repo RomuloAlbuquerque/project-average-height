@@ -61,5 +61,12 @@ public class PersonResource {
 		
 		return amount;
 	}
+	
+	@GetMapping(value = "/people-with-below-average-height")
+	public List<PersonDTO> peopleWithBelowAverageHeight(){
+		List<PersonDTO> listDTO = service.peopleWithBelowAverageHeight();
+		
+		return listDTO;
+	}
 
 }
