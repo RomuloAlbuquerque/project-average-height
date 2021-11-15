@@ -2,6 +2,8 @@ package com.project.dto;
 
 import java.io.Serializable;
 
+import com.project.entities.Person;
+
 public class PersonDTO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -19,6 +21,12 @@ public class PersonDTO implements Serializable {
 		this.id = id;
 		this.name = name;
 		this.height = height;
+	}
+
+	public PersonDTO(Person entity) {
+		this.id = entity.getId();
+		this.name = entity.getName();
+		this.height = entity.getHeight();
 	}
 
 	public Long getId() {
