@@ -5,6 +5,7 @@ import java.net.URI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,10 +24,20 @@ public class PersonResource {
 	
 	@PostMapping
 	public ResponseEntity<PersonDTO> create(@RequestBody PersonDTO dto){
+		
 		dto = service.create(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(dto.getId()).toUri();
+		
 		return ResponseEntity.created(uri).body(dto);
+	}
+	
+	@GetMapping(value = "/average-height")
+	public double averageHeight() {
+		
+		double averageHeight = service.averageHeight();
+		
+		return averageHeight;
 	}
 
 }
