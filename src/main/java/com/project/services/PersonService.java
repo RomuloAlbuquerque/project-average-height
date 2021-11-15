@@ -128,5 +128,35 @@ public class PersonService {
 
 		return amountBelowAverageheight;
 	}
+	
+	@Transactional
+	public List<PersonDTO> peopleWithBelowAverageHeight(){
+		
+		List<Person> list = new ArrayList<>();
+		list = repository.findAll();
+
+		double sum = 0;
+		for (int i = 0; i < list.size(); i++) {
+			sum += list.get(i).getHeight();
+		}
+		double media = sum / list.size();
+		Person entity = new Person();
+		List<Person> listPeopleWithBelowAverageHeight = new ArrayList<>();
+		for (int i = 0; i < list.size(); i++) {
+			double temp = list.get(i).getHeight();
+			if (temp < media) {
+				entity = list.get(i);
+				listPeopleWithBelowAverageHeight.add(entity);
+			}
+		}
+		
+		List<PersonDTO> listDTO = new ArrayList<>();
+		for (int i = 0; i < listPeopleWithBelowAverageHeight.size(); i++) {
+			PersonDTO dto = new PersonDTO(listPeopleWithBelowAverageHeight.get(i));
+			listDTO.add(dto);
+		}
+		
+		return listDTO;
+	}
 
 }
