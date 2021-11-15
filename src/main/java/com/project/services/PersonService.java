@@ -107,5 +107,26 @@ public class PersonService {
 
 		return listDTO;
 	}
+	
+	@Transactional
+	public int amountBelowAverageHeight() {
+		List<Person> list = new ArrayList<>();
+		list = repository.findAll();
+
+		double sum = 0;
+		for (int i = 0; i < list.size(); i++) {
+			sum += list.get(i).getHeight();
+		}
+		double media = sum / list.size();
+
+		int amountBelowAverageheight = 0;
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getHeight() < media) {
+				amountBelowAverageheight++;
+			}
+		}
+
+		return amountBelowAverageheight;
+	}
 
 }
