@@ -44,13 +44,22 @@ public class PersonResource {
 	@GetMapping(value = "/greater-height")
 	public List<PersonDTO> greaterHeight() {
 		List<PersonDTO> list = service.greaterHeight();
+		
 		return list;
 	}
 	
 	@GetMapping(value = "/shorter-height")
 	public List<PersonDTO> shorterHeight() {
 		List<PersonDTO> list = service.shorterHeight();
+		
 		return list;
+	}
+	
+	@GetMapping(value = "/amount-below-average-height")
+	public int amountBelowAverageHeight() {
+		int amount = service.amountBelowAverageHeight();
+		
+		return amount;
 	}
 
 }
