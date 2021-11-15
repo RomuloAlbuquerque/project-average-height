@@ -41,5 +41,38 @@ public class PersonService {
 
 		return averageHeight;
 	}
+	
+	@Transactional
+	public List<PersonDTO> greaterHeight() {
+		List<Person> list = new ArrayList<>();
+		list = repository.findAll();
+
+		double height = 0.0;
+		Person entity = new Person();
+		for (int i = 0; i < list.size(); i++) {
+			double temp = list.get(i).getHeight();
+			if (temp > height) {
+				height = temp;
+				entity = list.get(i);
+			}
+		}
+		PersonDTO dto = new PersonDTO(entity);
+
+		List<Person> listPeople = new ArrayList<>();
+		for (int i = 0; i < list.size(); i++) {
+			double temp = list.get(i).getHeight();
+			if (temp == dto.getHeight()) {
+				listPeople.add(list.get(i));
+			}
+		}
+		
+		List<PersonDTO> listDTO = new ArrayList<>();
+		for(int i = 0; i < listPeople.size(); i++) {
+			PersonDTO tempDTO = new PersonDTO(listPeople.get(i));
+			listDTO.add(tempDTO);
+		}
+
+		return listDTO;
+	}
 
 }
