@@ -2,6 +2,7 @@
 package com.project.resources;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +39,12 @@ public class PersonResource {
 		double averageHeight = service.averageHeight();
 		
 		return averageHeight;
+	}
+	
+	@GetMapping(value = "/greater-height")
+	public List<PersonDTO> greaterHeight() {
+		List<PersonDTO> list = service.greaterHeight();
+		return list;
 	}
 
 }
